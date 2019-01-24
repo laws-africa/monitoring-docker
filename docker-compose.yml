@@ -1,0 +1,20 @@
+version: '3.6'
+
+services:
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:${TAG}
+    container_name: metricbeat
+    # The commented sections below enable Metricbeat to monitor the Docker host,
+    # rather than the Metricbeat container.
+    volumes:
+      - /proc:/hostfs/proc:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /:/hostfs:ro
+      - './config/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml'
+    command: --strict.perms=false -e -system.hostfs=/hostfs  # -e flag to log to stderr and disable syslog/file output
+    healthcheck:
+      test: metricbeat test config
+      interval: 30s
+      timeout: 15s
+      retries: 5
+    restart: always
