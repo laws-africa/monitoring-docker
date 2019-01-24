@@ -1,3 +1,5 @@
+name: ${NODE_NAME}
+
 filebeat.config:
   prospectors:
     path: ${path.config}/prospectors.d/*.yml
@@ -20,3 +22,8 @@ xpack.monitoring.enabled: true
 
 filebeat.modules:
   - module: nginx
+    enabled: true
+    access:
+      var.paths: ['/mnt/log/nginx/*access.log*']
+    error:
+      var.paths: ['/mnt/log/nginx/*error.log*']
