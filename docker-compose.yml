@@ -21,3 +21,19 @@ services:
     restart: always
     environment:
       NODE_NAME: ${HOSTNAME}
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:${TAG}
+    container_name: filebeat
+    command: --strict.perms=false -e  # -e flag to log to stderr and disable syslog/file output
+    # If the host system has logs at "/var/log", mount them at "/mnt/log"
+    # inside the container, where Filebeat can find them.
+    volumes:
+      - '/var/log:/mnt/log:ro'
+      - './config/filebeat.yml:/usr/share/filebeat/filebeat.yml'
+    healthcheck:
+      test: filebeat test config
+      interval: 30s
+      timeout: 15s
+      retries: 5
+    restart: always

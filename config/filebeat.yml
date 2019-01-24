@@ -17,3 +17,6 @@ setup.kibana:
   protocol: "http"
 
 xpack.monitoring.enabled: true
+
+filebeat.modules:
+  - module: nginx
