@@ -2,6 +2,17 @@ metricbeat.config.modules:
   path: ${path.config}/modules.d/*.yml
   reload.enabled: false
 
+processors:
+- add_cloud_metadata:
+
+output.elasticsearch:
+  hosts: ['elk.int.laws.africa:9200']
+
+setup.kibana:
+  host: "http://elk.int.laws.africa:5601"
+
+xpack.monitoring.enabled: true
+
 metricbeat.modules:
 - module: docker
   metricsets:
@@ -15,14 +26,3 @@ metricbeat.modules:
   hosts: ["unix:///var/run/docker.sock"]
   period: 10s
   enabled: true
-
-processors:
-- add_cloud_metadata:
-
-output.elasticsearch:
-  hosts: ['elk.int.laws.africa:9200']
-
-setup.kibana:
-  host: "http://elk.int.laws.africa:5601"
-
-xpack.monitoring.enabled: true
