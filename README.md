@@ -1,8 +1,10 @@
 # Monitoring docker configuration for hosts
 
-This installs common monitoring on our hosts.
+This installs common monitoring on our hosts, using [Elastic Beats](https://www.elastic.co/products/beats). These monitors send their data to our [ELK stack](https://github.com/laws-africa/elk-docker) at `elk.int.laws.africa` and are available through our Kibana metrics dashboard.
 
-* Metricbeat: monitors system and docker usage
+Monitors:
+
+* [Metricbeat](https://www.elastic.co/products/beats/metricbeat): monitors system metrics and docker usage
 
 # Installation
 
