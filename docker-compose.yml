@@ -13,6 +13,8 @@ services:
       - /:/hostfs:ro
       - './config/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml'
     command: --strict.perms=false -e -system.hostfs=/hostfs  # -e flag to log to stderr and disable syslog/file output
+    security_opt:
+      - apparmor:unconfined
     healthcheck:
       test: metricbeat test config
       interval: 30s

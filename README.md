@@ -17,4 +17,6 @@ Install this package:
 2. `cd monitoring-docker`
 3. `sudo setfacl -m u:1000:rw /var/run/docker.sock`
 4. `echo "HOSTNAME=${HOSTNAME}" >> .env`
-5. `docker-compose up -d`
+5. `chmod go-w config/*.yml`
+6. `sudo chown root:ubuntu config/filebeat.yml`
+7. `docker-compose up -d`
