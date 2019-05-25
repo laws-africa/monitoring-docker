@@ -50,6 +50,7 @@ metricbeat.modules:
   metricsets:
     - filesystem
     - fsstat
+  filesystem.ignore_types: [autofs, binfmt_misc]
   processors:
   - drop_event.when.regexp:
       system.filesystem.mount_point: '^/(sys|cgroup|proc|dev|etc|host|lib)($|/)'
