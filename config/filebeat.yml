@@ -1,7 +1,7 @@
 name: ${NODE_NAME}
 
 filebeat.config:
-  prospectors:
+  inputs:
     path: ${path.config}/prospectors.d/*.yml
     reload.enabled: false
   modules:
